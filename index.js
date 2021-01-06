@@ -13,6 +13,7 @@ escpos.Serial = require('escpos-serialport');
 escpos.USB = require('escpos-usb');
 
 
+
 /**
  * @type {Browser}
  */
@@ -57,32 +58,32 @@ async function closeBrowser() {
  */
 async function print(printer, url, selector, waitForFunction, options) {
     //initialize the browser if it isn't initialized
-    await launchBrowser();
+    // await launchBrowser();
 
     let page = undefined;
 
     try {
-        page = await browser.newPage();
+        // page = await browser.newPage();
 
-        let width = printer.options.width;
-        if(!width) {
-            width = 575;
-        }
+        // let width = printer.options.width;
+        // if(!width) {
+        //     width = 575;
+        // }
 
-        // noinspection JSObjectNullOrUndefined
-        await page.setViewport({width: width, height: 600});
+        // // noinspection JSObjectNullOrUndefined
+        // await page.setViewport({width: width, height: 600});
 
-        await page.goto(url);
-        if(waitForFunction) {
-            await page.waitForFunction(waitForFunction);
-        }
+        // await page.goto(url);
+        // if(waitForFunction) {
+        //     await page.waitForFunction(waitForFunction);
+        // }
 
-        let screen = await screenshotDOMElement({
-            page: page,
-            selector: selector?selector:'body'
-        });
+        // let screen = await screenshotDOMElement({
+        //     page: page,
+        //     selector: selector?selector:'body'
+        // });
 
-        printer.printImage(screen, options);
+        printer.printImageFromUrl(options);
 
     } catch (e) {
         console.error(e.stack);
@@ -198,6 +199,57 @@ class Printer {
                 }
             }
         });
+    }
+
+    /**
+     * @param {Buffer|string} image The image to be printed, can be either a buffer of pixels or an url to the image file.
+     * @param {Object} [options]
+     * @param {boolean} [options.cut = true] - true if the printer should cut paper at the end
+     * @param {number} [options.topFeed = 2] - number of lines to feed before printing
+     * @param {number} [options.bottomFeed = 2] - number of lines to feed after printing
+     */
+    printImageFromUrl(options= {}) {
+        
+        getPixels("till.png", (err, pixels) =>{
+            if(err) {
+                console.error(err);
+            } else {
+                try {
+                    this.adapter.open(err => {
+                        if(err) {
+                            console.error(err);
+                        } else {
+                            if(options.topFeed === undefined) {
+                                options.topFeed = 2;
+                            }
+                            if(options.topFeed) {
+                                this.printer.feed(options.topFeed);
+                            }
+
+                            this.printer.align('ct').raster(new escpos.Image(pixels), null);
+
+                            if(options.bottomFeed === undefined) {
+                                options.bottomFeed = 2;
+                            }
+                            if(options.bottomFeed) {
+                                this.printer.feed(options.bottomFeed);
+                            }
+
+                            if(options.cut === undefined) {
+                                options.cut = true;
+                            }
+                            if(options.cut) {
+                                this.printer.cut();
+                            }
+
+                            this.printer.close();
+                        }
+                    });
+                } catch (e) {
+                    console.error(e.stack);
+                }
+            }
+          })
     }
 }
 
