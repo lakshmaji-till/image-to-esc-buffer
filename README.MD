@@ -1,3 +1,4 @@
+## forked from [HTMLtoESCPOS](https://github.com/FanghanHu/HTMLtoESCPOS) 
 ## This module renders html and allow it to be printed with an POS printer.
 
 ![results](https://github.com/FanghanHu/HTMLtoESCPOS/raw/master/readmeImages/Results.jpg)
