@@ -28,6 +28,8 @@
     "escpos-serialport": "^3.0.0-alpha.4",
     "escpos-usb": "^3.0.0-alpha.4",
     "get-pixels": "^3.3.2",
+    "jimp": "^0.16.1",
+    "ndarray": "^1.0.19",
     "puppeteer": "^5.3.1"
   }
 }
