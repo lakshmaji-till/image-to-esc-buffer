@@ -213,10 +213,7 @@ class Printer {
     Jimp.read("till.png", (err, img) => {
       if (err) throw err;
 
-      // console.log('till image pixels response ', img)
-
       img.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
-        // console.log('till get buffer ', buffer);
         const img_data = {
           width: img.bitmap.width,
           height: img.bitmap.height,
@@ -229,7 +226,6 @@ class Printer {
           0
         );
 
-        console.log("bello ------------ ndArrRef;, ndArrRef", ndArrRef);
         try {
           this.adapter.open((err) => {
             if (err) {
