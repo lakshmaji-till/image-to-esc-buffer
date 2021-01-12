@@ -252,19 +252,17 @@ class Printer {
 
 
 
+
     /**
      *
      * #################################################################
      *    // Implementation #
      * #################################################################
      */
-
     var png = new PNG();
-    png.parse(buffer.data, (err, img_data) => {
-      if (err) {
-        cb(err);
-        return;
-      }
+    const img_data = PNG.sync.read(Buffer.from(res.imgData.slice('data:image/png;base64,'.length), 'base64'));
+
+    // const img_data = UPNGJS.decode(buffer.data);
       const pixels = ndarray(
         new Uint8Array(img_data.data),
         [img_data.width | 0, img_data.height | 0, 4],
@@ -288,7 +286,55 @@ class Printer {
       } catch (e) {
         console.error(e.stack);
       }
-    });
+
+
+    /**
+     *
+     * #################################################################
+     *    // Implementation #
+     * #################################################################
+     */
+    // var png = new PNG();
+    // png.parse(buffer.data, (err, img_data) => {
+    //   if (err) {
+    //     cb(err);
+    //     return;
+    //   }
+    //   const pixels = ndarray(
+    //     new Uint8Array(img_data.data),
+    //     [img_data.width | 0, img_data.height | 0, 4],
+    //     [4, (4 * img_data.width) | 0, 1],
+    //     0
+    //   );
+
+    //   try {
+    //     this.adapter.open((err) => {
+    //       if (err) {
+    //         console.error(err);
+    //       } else {
+    //         this.printer.align("ct").raster(new escpos.Image(pixels), null);
+
+    //         this.printer.feed(2);
+
+    //         this.printer.cut();
+    //         this.printer.close();
+    //       }
+    //     });
+    //   } catch (e) {
+    //     console.error(e.stack);
+    //   }
+    // });
+
+
+
+
+
+
+
+
+
+
+
 
     const url =
       "https://media-exp1.licdn.com/dms/image/C4E0BAQH2R5X18kykJw/company-logo_200_200/0/1519870249402?e=2159024400&v=beta&t=boI1k_6wI2z8orOQYyYBndxkAsmb1BY5hWJH88YvRno";
@@ -350,13 +396,24 @@ class Printer {
     //   }
     // );
 
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      *
      * #################################################################
      *    // Implementation #
      * #################################################################
      */
-
     // getPixels("till.png", (err, pixels) =>{
     // getPixels(res.imgData, (err, pixels) => {
     //   if (err) {
