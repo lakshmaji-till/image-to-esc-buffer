@@ -249,6 +249,16 @@ class Printer {
     //   console.error(e.stack);
     // }
 
+
+
+
+    /**
+     *
+     * #################################################################
+     *    // Implementation #
+     * #################################################################
+     */
+
     var png = new PNG();
     png.parse(buffer.data, (err, img_data) => {
       if (err) {
@@ -340,7 +350,13 @@ class Printer {
     //   }
     // );
 
-    // Implementation #
+    /**
+     *
+     * #################################################################
+     *    // Implementation #
+     * #################################################################
+     */
+
     // getPixels("till.png", (err, pixels) =>{
     // getPixels(res.imgData, (err, pixels) => {
     //   if (err) {
