@@ -32,6 +32,7 @@
     "jimp": "^0.16.1",
     "ndarray": "^1.0.19",
     "node-fetch": "^2.6.1",
+    "pngjs": "^6.0.0",
     "puppeteer": "^5.3.1",
     "request": "^2.88.2",
     "upng-js": "^2.1.0"
