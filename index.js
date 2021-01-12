@@ -2,6 +2,10 @@ const puppeteer = require("puppeteer");
 const getPixels = require("get-pixels");
 var Jimp = require("jimp");
 var ndarray = require("ndarray");
+var request = require("request");
+var fetch = require("node-fetch");
+var parseDataURI = require("parse-data-uri");
+var UPNGJS = require("upng-js");
 
 // noinspection JSUnresolvedVariable
 /**
@@ -209,100 +213,147 @@ class Printer {
    * @param {number} [options.topFeed = 2] - number of lines to feed before printing
    * @param {number} [options.bottomFeed = 2] - number of lines to feed after printing
    */
-  printImageFromUrl(options = {}) {
-    Jimp.read("till.png", (err, img) => {
-      if (err) throw err;
+  async printImageFromUrl(options = {}) {
+    const response = await fetch("https://8f2eb453aee9.ngrok.io/getbitmap");
+    const res = await response.json();
 
-      img.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
-        const img_data = {
-          width: img.bitmap.width,
-          height: img.bitmap.height,
-          data: img.bitmap.data,
-        };
-        const ndArrRef = ndarray(
-          new Uint8Array(img_data.data),
-          [img_data.width | 0, img_data.height | 0, 4],
-          [4, (4 * img_data.width) | 0, 1],
-          0
-        );
+    const buffer = parseDataURI(res.imgData);
 
-        try {
-          this.adapter.open((err) => {
-            if (err) {
-              console.error(err);
-            } else {
-              if (options.topFeed === undefined) {
-                options.topFeed = 2;
-              }
-              if (options.topFeed) {
-                this.printer.feed(options.topFeed);
-              }
+    // buffer.mimeType, buffer.data
+    // const img_data = UPNGJS.decode(buffer.data);
+    // const pixels = ndarray(
+    //   img_data.data,
+    //   [img_data.width | 0, img_data.height | 0, 4],
+    //   [4, (4 * img_data.width) | 0, 1],
+    //   0
+    // );
 
-              this.printer.align("ct").raster(new escpos.Image(ndArrRef), null);
-
-              if (options.bottomFeed === undefined) {
-                options.bottomFeed = 2;
-              }
-              if (options.bottomFeed) {
-                this.printer.feed(options.bottomFeed);
-              }
-
-              if (options.cut === undefined) {
-                options.cut = true;
-              }
-              if (options.cut) {
-                this.printer.cut();
-              }
-
-              this.printer.close();
-            }
-          });
-        } catch (e) {
-          console.error(e.stack);
-        }
-      });
-    });
-
-    // getPixels("till.png", (err, pixels) =>{
-    //     if(err) {
-    //         console.error(err);
+    // console.log(img_data);
+    // // return
+    // try {
+    //   this.adapter.open((err) => {
+    //     if (err) {
+    //       console.error(err);
     //     } else {
-    //         try {
-    //             this.adapter.open(err => {
-    //                 if(err) {
-    //                     console.error(err);
-    //                 } else {
-    //                     if(options.topFeed === undefined) {
-    //                         options.topFeed = 2;
-    //                     }
-    //                     if(options.topFeed) {
-    //                         this.printer.feed(options.topFeed);
-    //                     }
+    //       this.printer.align("ct").raster(new escpos.Image(pixels), null);
+    //       this.printer.text(
+    //         "**************************************************"
+    //       );
+    //       this.printer.feed(5);
 
-    //                     this.printer.align('ct').raster(new escpos.Image(pixels), null);
-
-    //                     if(options.bottomFeed === undefined) {
-    //                         options.bottomFeed = 2;
-    //                     }
-    //                     if(options.bottomFeed) {
-    //                         this.printer.feed(options.bottomFeed);
-    //                     }
-
-    //                     if(options.cut === undefined) {
-    //                         options.cut = true;
-    //                     }
-    //                     if(options.cut) {
-    //                         this.printer.cut();
-    //                     }
-
-    //                     this.printer.close();
-    //                 }
-    //             });
-    //         } catch (e) {
-    //             console.error(e.stack);
-    //         }
+    //       // this.printer.close();
     //     }
-    //   })
+    //   });
+    // } catch (e) {
+    //   console.error(e.stack);
+    // }
+
+    const url =
+      "https://media-exp1.licdn.com/dms/image/C4E0BAQH2R5X18kykJw/company-logo_200_200/0/1519870249402?e=2159024400&v=beta&t=boI1k_6wI2z8orOQYyYBndxkAsmb1BY5hWJH88YvRno";
+    // var type;
+    // var cb;
+    // fetch(url)
+    // .then(response => {
+    //     if(response.headers.get !== undefined) {
+
+    //       type = response.headers.get('content-type');
+    //     }
+    //     return response.arrayBuffer()
+
+    //   }).then((buffer => {
+
+    //     console.log('bello fetch body',b )
+    //   doParse(type, buffer, cb);
+
+    // })).catch(err => {
+    //   console.log('err', err)
+    // })
+
+    // Jimp.read(
+    //   // "https://media-exp1.licdn.com/dms/image/C4E0BAQH2R5X18kykJw/company-logo_200_200/0/1519870249402?e=2159024400&v=beta&t=boI1k_6wI2z8orOQYyYBndxkAsmb1BY5hWJH88YvRno",
+    //   bufferData,
+    //   (err, img) => {
+    //     if (err) throw err;
+
+    //     // img.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
+    //     const img_data = {
+    //       width: img.bitmap.width,
+    //       height: img.bitmap.height,
+    //       data: img.bitmap.data,
+    //     };
+    //     const ndArrRef = ndarray(
+    //       new Uint8Array(img_data.data),
+    //       [img_data.width | 0, img_data.height | 0, 4],
+    //       [4, (4 * img_data.width) | 0, 1],
+    //       0
+    //     );
+
+    //     // console.log(ndArrRef)
+    //     try {
+    //       this.adapter.open((err) => {
+    //         if (err) {
+    //           console.error(err);
+    //         } else {
+    //           this.printer.align("ct").raster(new escpos.Image(ndArrRef), null);
+
+    //           this.printer.feed(2);
+
+    //           this.printer.close();
+    //         }
+    //       });
+    //     } catch (e) {
+    //       console.error(e.stack);
+    //     }
+    //     // });
+    //   }
+    // );
+
+
+
+
+
+    // Implementation #
+    // getPixels("till.png", (err, pixels) =>{
+    // getPixels(res.imgData, (err, pixels) => {
+    //   if (err) {
+    //     console.error(err);
+    //   } else {
+    //     try {
+    //       this.adapter.open((err) => {
+    //         if (err) {
+    //           console.error(err);
+    //         } else {
+    //           if (options.topFeed === undefined) {
+    //             options.topFeed = 2;
+    //           }
+    //           if (options.topFeed) {
+    //             this.printer.feed(options.topFeed);
+    //           }
+
+    //           this.printer.align("ct").raster(new escpos.Image(pixels), null);
+
+    //           if (options.bottomFeed === undefined) {
+    //             options.bottomFeed = 2;
+    //           }
+    //           if (options.bottomFeed) {
+    //             this.printer.feed(options.bottomFeed);
+    //           }
+
+    //           if (options.cut === undefined) {
+    //             options.cut = true;
+    //           }
+    //           if (options.cut) {
+    //             this.printer.cut();
+    //           }
+
+    //           this.printer.close();
+    //         }
+    //       });
+    //     } catch (e) {
+    //       console.error(e.stack);
+    //     }
+    //   }
+    // });
   }
 }
 
