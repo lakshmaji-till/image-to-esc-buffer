@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/FanghanHu/HTMLtoESCPOS#readme",
   "dependencies": {
+    "@tillpos/xml-escpos-helper": "^0.1.6",
     "base64-img": "^1.0.4",
     "escpos": "^3.0.0-alpha.6",
     "escpos-network": "^3.0.0-alpha.5",
@@ -30,11 +31,13 @@
     "escpos-usb": "^3.0.0-alpha.4",
     "get-pixels": "^3.3.2",
     "jimp": "^0.16.1",
+    "lodash": "^4.17.20",
     "ndarray": "^1.0.19",
     "node-fetch": "^2.6.1",
     "pngjs": "^6.0.0",
     "puppeteer": "^5.3.1",
     "request": "^2.88.2",
+    "table": "^6.0.7",
     "upng-js": "^2.1.0"
   }
 }
