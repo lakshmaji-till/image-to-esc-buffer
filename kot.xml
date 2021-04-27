@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <align mode="center">
+
+        <!-- Organization logo -->
+        <line-feed />
+        <!--<image density="d24">
+                {{{orgLogo}}}
+                </image> -->
+
+        <!-- store name -->
+
+        <align mode="center">
+            <bold>
+                <text-line size="1:0">{{storeName}}</text-line>
+            </bold>
+        </align>
+        <line-feed />
+
+        <!-- Store details -->
+        <align mode="center">
+            <small>
+                <text-line>{{storeNo}}</text-line>
+                <text-line>{{storeAddress}}</text-line>
+                <text-line>{{storePhone}}</text-line>
+            </small>
+        </align>
+        <line-feed />
+        <align mode="center">
+
+            <text-line>{{{myDivider}}}</text-line>
+        </align>
+        <line-feed />
+
+        <!-- Order details -->
+        <align mode="center">
+            <text-line size="0:0">{{orderDetails}}</text-line>
+        </align>
+
+        <line-feed />
+        <align mode="center">
+
+            <text-line>{{{myDivider}}}</text-line>
+        </align>
+        <line-feed />
+
+        <!-- Order items -->
+        <align mode="center">
+            <text-line size="0:0">{{orderItems}}</text-line>
+        </align>
+
+        <line-feed />
+        <align mode="center">
+
+            <text-line>{{{myDivider}}}</text-line>
+        </align>
+        <line-feed />
+
+    </align>
+    <line-feed />
+
+    <!-- <paper-cut /> -->
+</document>

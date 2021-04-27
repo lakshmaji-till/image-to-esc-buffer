@@ -365,10 +365,15 @@
   dependencies:
     debug "^4.1.1"
 
-"@tillpos/xml-escpos-helper@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@tillpos/xml-escpos-helper/-/xml-escpos-helper-0.1.6.tgz#3c433287b7eff4d132f51c5ad00524ea0c780b78"
-  integrity sha512-ES4SmlINmwvKJK526wMVVVAwH4lz56RYGhp1qjlqUmBOEWu/3T+VEmvydBv7wqeysf3eMMVgIPr97beizoHhaQ==
+"@tillpos/rn-receipt-printer-utils@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@tillpos/rn-receipt-printer-utils/-/rn-receipt-printer-utils-0.0.12.tgz#e9100144999d33c3daac78b9c2ebdada25b9432c"
+  integrity sha512-PoyA52UuG2Aitm806Ool9AFJEQsNTPlQBYs9R+m7NLXm9uRrowseozppB13DfebROmRpIPUkaLMfX/XkE362wQ==
+
+"@tillpos/xml-escpos-helper@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@tillpos/xml-escpos-helper/-/xml-escpos-helper-0.1.7.tgz#fd4e627e189d6fb98c08fb7c20f954dea36ebf85"
+  integrity sha512-LN8Zdlc9GjOvzZD+A3tD9JX3KRJ89fynvDD6huUjd2CBDqvCEZp97Yhkm6QDO7whms57axU0P5Efj1IfKcy8gA==
   dependencies:
     buffer "^6.0.3"
     mustache "^4.1.0"
@@ -622,6 +627,13 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
+
+cross-fetch@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.6.tgz#3a4040bc8941e653e0e9cf17f29ebcd177d3365c"
+  integrity sha512-KBPUbqgFjzWlVcURG+Svp9TlhA5uliYtiNx/0r8nv0pdypeQCRJ9IaSIc3q/x3q8t3F75cHuwxVql1HFGHCNJQ==
+  dependencies:
+    node-fetch "2.6.1"
 
 cwise-compiler@^1.1.2:
   version "1.1.3"
@@ -1252,7 +1264,7 @@ node-bitmap@0.0.1:
   resolved "https://registry.yarnpkg.com/node-bitmap/-/node-bitmap-0.0.1.tgz#180eac7003e0c707618ef31368f62f84b2a69091"
   integrity sha1-GA6scAPgxwdhjvMTaPYvhLKmkJE=
 
-node-fetch@^2.6.1:
+node-fetch@2.6.1, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==

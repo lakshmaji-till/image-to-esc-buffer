@@ -23,8 +23,10 @@
   },
   "homepage": "https://github.com/FanghanHu/HTMLtoESCPOS#readme",
   "dependencies": {
-    "@tillpos/xml-escpos-helper": "^0.1.6",
+    "@tillpos/rn-receipt-printer-utils": "^0.0.12",
+    "@tillpos/xml-escpos-helper": "^0.1.7",
     "base64-img": "^1.0.4",
+    "cross-fetch": "^3.0.6",
     "escpos": "^3.0.0-alpha.6",
     "escpos-network": "^3.0.0-alpha.5",
     "escpos-serialport": "^3.0.0-alpha.4",
